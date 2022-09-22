@@ -20,7 +20,7 @@ rollbar.log('Hello world!')
 const students = ['Jimmy', 'Timothy', 'Jimothy']
 
 app.get('/', (req, res) => {
-    rollbar.info('Someone loaded the HTML')
+    rollbar.log('Someone loaded the HTML')
     res.sendFile(path.join(__dirname, '/index.html'))
 })
 
