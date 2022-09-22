@@ -20,6 +20,7 @@ rollbar.log('Hello world!')
 const students = ['Jimmy', 'Timothy', 'Jimothy']
 
 app.get('/', (req, res) => {
+    rollbar.info('Someone loaded the HTML')
     res.sendFile(path.join(__dirname, '/index.html'))
 })
 
@@ -37,11 +38,14 @@ app.post('/api/students', (req, res) => {
 
    try {
        if (index === -1 && name !== '') {
+            rollbar.log('student added successfully', {author: 'Kyle', type: 'manual entry'})
            students.push(name)
            res.status(200).send(students)
        } else if (name === ''){
+           rollbar.error('no name provided')
            res.status(400).send('You must enter a name.')
        } else {
+           rollbar.error('student already exists')
            res.status(400).send('That student already exists.')
        }
    } catch (err) {
