@@ -57,6 +57,9 @@ app.delete('/api/students/:index', (req, res) => {
     const targetIndex = +req.params.index
     
     students.splice(targetIndex, 1)
+
+    rollbar.info('student was deleted')
+
     res.status(200).send(students)
 })
 
